@@ -1,5 +1,4 @@
-import 'package:badges/badges.dart'
-    as badges; // Give a unique prefix 'badges' to the badges package
+import 'package:badges/badges.dart' as badges; 
 import 'package:cart/helper/db_helper.dart';
 import 'package:cart/model/cart_model.dart';
 import 'package:cart/provider/cartprovider.dart';
@@ -21,12 +20,11 @@ class _CartScreenState extends State<CartScreen> {
     final cart = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shopping Cart'),
+        title: Text('YOUR CART'),
         centerTitle: true,
         actions: [
           Center(
             child: badges.Badge(
-              // Use the 'badges' prefix here
               badgeContent: Consumer<CartProvider>(
                 builder: (context, value, child) {
                   return Text(value.getCounter().toString(),
@@ -143,11 +141,7 @@ class _CartScreenState extends State<CartScreen> {
                                                 SizedBox(
                                                   height: 5,
                                                 ),
-                                                Text(
-                                                  snapshot.data![index].unitTag
-                                                          .toString() +
-                                                      " " +
-                                                      r"$" +
+                                                Text(r"Rs. " +
                                                       snapshot.data![index]
                                                           .productPrice
                                                           .toString(),
@@ -168,7 +162,7 @@ class _CartScreenState extends State<CartScreen> {
                                                       height: 35,
                                                       width: 100,
                                                       decoration: BoxDecoration(
-                                                          color: Colors.green,
+                                                          color: Colors.teal,
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5)),
@@ -340,15 +334,19 @@ class _CartScreenState extends State<CartScreen> {
                   children: [
                     ReusableWidget(
                       title: 'Sub Total',
-                      value: r'$' + value.getTotalPrice().toStringAsFixed(2),
+                      value: r'Rs. ' + value.getTotalPrice().toStringAsFixed(2),
                     ),
                     ReusableWidget(
-                      title: 'Discout 5%',
-                      value: r'$' + '20',
+                      title: 'Discout 10%',
+                      value: r'Rs. ' +
+                          (value.getTotalPrice() * 0.1).toStringAsFixed(2),
                     ),
                     ReusableWidget(
                       title: 'Total',
-                      value: r'$' + value.getTotalPrice().toStringAsFixed(2),
+                      value: r'Rs. ' +
+                          (value.getTotalPrice() -
+                                  (value.getTotalPrice() * 0.1))
+                              .toStringAsFixed(2),
                     )
                   ],
                 ),
