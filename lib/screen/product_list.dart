@@ -26,14 +26,14 @@ class _ProductListState extends State<ProductList> {
   ];
   List<String> productUnit = [
     'KG',
-    'Dozen',
+    'KG',
     'KG',
     'Dozen',
     'KG',
     'KG',
     'KG',
   ];
-  List<int> productPrice = [10, 20, 30, 40, 50, 60, 70];
+  List<int> productPrice = [15, 20, 30, 45, 65, 60, 100];
   List<String> productImage = [
     'https://image.shutterstock.com/image-photo/mango-isolated-on-white-background-600w-610892249.jpg',
     'https://image.shutterstock.com/image-photo/orange-fruit-slices-leaves-isolated-600w-1386912362.jpg',
@@ -51,7 +51,7 @@ class _ProductListState extends State<ProductList> {
     final cart = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product List'),
+        title: Text('PRODUCTS'),
         centerTitle: true,
         actions: [
           InkWell(
@@ -77,7 +77,7 @@ class _ProductListState extends State<ProductList> {
           SizedBox(width: 20.0)
         ],
       ),
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.teal,
       body: Column(
         children: [
           Expanded(
@@ -116,11 +116,8 @@ class _ProductListState extends State<ProductList> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    productUnit[index].toString() +
-                                        " " +
-                                        r"$" +
-                                        productPrice[index].toString(),
+                                  Text(r"Rs. " +
+                                        productPrice[index].toString() + " / " + productUnit[index].toString(),
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500),
@@ -162,7 +159,7 @@ class _ProductListState extends State<ProductList> {
                                           cart.addCounter();
 
                                           final snackBar = SnackBar(
-                                            backgroundColor: Colors.green,
+                                            backgroundColor: Colors.redAccent,
                                             content: Text(
                                                 'Product is added to cart'),
                                             duration: Duration(seconds: 1),
@@ -186,7 +183,7 @@ class _ProductListState extends State<ProductList> {
                                         height: 35,
                                         width: 100,
                                         decoration: BoxDecoration(
-                                            color: Colors.green,
+                                            color: Colors.teal,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         child: const Center(
@@ -205,130 +202,6 @@ class _ProductListState extends State<ProductList> {
                         ]));
                   }),
             ),
-
-            //  ListView.builder(
-            //     itemCount: productName.length,
-            //     itemBuilder: (context, index) {
-            //       return Card(
-            //         child: Padding(
-            //           padding: const EdgeInsets.all(8.0),
-            //           child: Column(
-            //             mainAxisAlignment: MainAxisAlignment.center,
-            //             crossAxisAlignment: CrossAxisAlignment.start,
-            //             children: [
-            //               Row(
-            //                 mainAxisAlignment: MainAxisAlignment.start,
-            //                 crossAxisAlignment: CrossAxisAlignment.center,
-            //                 mainAxisSize: MainAxisSize.max,
-            //                 children: [
-            //                   Image(
-            //                     height: 100,
-            //                     width: 100,
-            //                     image: NetworkImage(
-            //                         productImage[index].toString()),
-            //                   ),
-            //                   SizedBox(
-            //                     width: 10,
-            //                   ),
-            //                   Expanded(
-            //                     child: Column(
-            //                       mainAxisAlignment: MainAxisAlignment.start,
-            //                       crossAxisAlignment: CrossAxisAlignment.start,
-            //                       children: [
-            //                         Text(
-            //                           productName[index].toString(),
-            //                           style: TextStyle(
-            //                               fontSize: 16,
-            //                               fontWeight: FontWeight.w500),
-            //                         ),
-            //                         SizedBox(
-            //                           height: 5,
-            //                         ),
-            //                         Text(
-            //                           productUnit[index].toString() +
-            //                               " " +
-            //                               r"$" +
-            //                               productPrice[index].toString(),
-            //                           style: TextStyle(
-            //                               fontSize: 16,
-            //                               fontWeight: FontWeight.w500),
-            //                         ),
-            //                         SizedBox(
-            //                           height: 5,
-            //                         ),
-            //                         Align(
-            //                           alignment: Alignment.centerRight,
-            //                           child: InkWell(
-            //                             onTap: () {
-            //                               print(index);
-            //                               print(index);
-            //                               print(productName[index].toString());
-            //                               print(productPrice[index].toString());
-            //                               print(productPrice[index]);
-            //                               print('1');
-            //                               print(productUnit[index].toString());
-            //                               print(productImage[index].toString());
-
-            //                               dbHelper!
-            //                                   .insert(Cart(
-            //                                       id: index,
-            //                                       productId: index.toString(),
-            //                                       productName:
-            //                                           productName[index]
-            //                                               .toString(),
-            //                                       initialPrice:
-            //                                           productPrice[index],
-            //                                       productPrice:
-            //                                           productPrice[index],
-            //                                       quantity: 1,
-            //                                       unitTag: productUnit[index]
-            //                                           .toString(),
-            //                                       image: productImage[index]
-            //                                           .toString()))
-            //                                   .then((value) {
-            //                                 cart.addTotalPrice(double.parse(
-            //                                     productPrice[index]
-            //                                         .toString()));
-            //                                 cart.addCounter();
-
-            //                                 final snackBar = SnackBar(
-            //                                   backgroundColor: Colors.green,
-            //                                   content: Text(
-            //                                       'Product is added to cart'),
-            //                                   duration: Duration(seconds: 1),
-            //                                 );
-
-            //                                 ScaffoldMessenger.of(context)
-            //                                     .showSnackBar(snackBar);
-            //                               }).onError((error, stackTrace) {
-            //                                 print("error" + error.toString());
-            //                                 final snackBar = SnackBar(
-            //                                     backgroundColor: Colors.red,
-            //                                     content: Text(
-            //                                         'Product is already added in cart'),
-            //                                     duration: Duration(seconds: 1));
-
-            //                                 ScaffoldMessenger.of(context)
-            //                                     .showSnackBar(snackBar);
-            //                               });
-            //                             },
-            //                             child: Container(
-            //                               height: 35,
-            //                               width: 100,
-            //                               decoration: BoxDecoration(
-            //                                   color: Colors.green,
-            //                                   borderRadius:
-            //                                       BorderRadius.circular(5)),
-            //                               child: const Center(
-            //                                 child: Text(
-            //                                   'Add to cart',
-            //                                   style: TextStyle(
-            //                                       color: Colors.white),
-            //                                 ),
-            //                               ),
-            //                             ),
-            //                           ),
-            //                         )
           )
         ],
       ),
